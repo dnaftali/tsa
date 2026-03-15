@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  # Increase max request size to handle large timestamp queries
+  tomcat:
+    max-http-form-post-size: 10MB
+
+spring:
+  application:
+    name: tsa
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+
+# -----------------------------------------------------------------------
+# TSA Configuration
+# -----------------------------------------------------------------------
+tsa:
+  # Path to PEM-encoded TSA signing certificate (with timeStamping EKU)
+  # This certificate must be signed by your smallstep CA.
+  certificate-path: config/tsa-cert.pem
+
+  # Path to PEM-encoded private key (PKCS#8 or traditional EC key)
+  private-key-path: config/tsa-key.pem
+
+  # TSA Policy OID — identifies your organisation's timestamping policy.
+  # You can change this to your own arc. Current value is a reasonable default.
+  policy-oid: 1.3.6.1.4.1.13762.3
+
+  # Whether to embed the TSA signing certificate in the issued token.
+  # Recommended to keep true so verifiers can validate without extra lookups.
+  include-certificate: true
+
+logging:
+  level:
+    "[id.my.thing.tsa]": DEBUG

@@ -1,0 +1,10 @@
+Place your PEM certificates here:
+
+  config/tsa-cert.pem   — TSA signing certificate (with timeStamping EKU)
+  config/tsa-key.pem    — TSA private key
+
+See CERTIFICATE-SETUP.md for detailed instructions on issuing these
+from the smallstep CA at 192.168.1.2.
+
+IMPORTANT: Keep tsa-key.pem private.
+           chmod 600 config/tsa-key.pem
